@@ -234,3 +234,31 @@ textarea:focus {
   opacity: 0.7;
   cursor: wait;
 }
+.answer-content p {
+  margin: 8px 0;
+}
+
+.answer-content p:empty {
+  height: 8px;
+}
+.dog-translation {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #fff3e4;
+  border: 1px solid #f3d3b3;
+}
+
+.translation-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.dog-translation p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #6b4c38;
+}

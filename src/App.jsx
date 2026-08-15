@@ -79,7 +79,29 @@ function App() {
         {answer && (
           <div className="answer-card">
             <div className="answer-title">🐶 PawPal says...</div>
-            <p>{answer}</p>
+
+            <div className="answer-content">
+              {answer
+                .split("DOG_TRANSLATION")[0]
+                .split("\n")
+                .map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
+            </div>
+
+            {answer.includes("DOG_TRANSLATION") && (
+              <div className="dog-translation">
+                <div className="translation-title">
+                  🐕 What your dog REALLY means
+                </div>
+
+                <p>
+                  {answer
+                    .split("DOG_TRANSLATION")[1]
+                    .trim()}
+                </p>
+              </div>
+            )}
           </div>
         )}
 

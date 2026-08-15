@@ -55,7 +55,7 @@ Give 2 or 3 practical suggestions, each on its own line.
 WHEN TO GET HELP
 Give a short explanation of warning signs that mean the owner should contact a veterinarian.
 
-WHAT YOUR DOG REALLY MEANS
+DOG_TRANSLATION
 Give ONE short, funny sentence written as if the dog is speaking.
 
 Do not diagnose medical conditions.
