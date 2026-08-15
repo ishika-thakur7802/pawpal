@@ -1,21 +1,31 @@
 import { GoogleGenAI } from "@google/genai";
 
 export default async (req) => {
-  if (req.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Method not allowed" }),
+      {
+        status: 405,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   try {
-    const { question } = JSON.parse(req.body);
+    const { question } = await req.json();
 
     if (!question?.trim()) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "Please enter a question." }),
-      };
+      return new Response(
+        JSON.stringify({ error: "Please enter a question." }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     const ai = new GoogleGenAI({
@@ -23,7 +33,7 @@ export default async (req) => {
     });
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.6-flash",
       contents: `
 You are PawPal, a warm and friendly AI companion for new dog owners.
 
@@ -49,23 +59,30 @@ ${question}
 `,
     });
 
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         answer: response.text,
       }),
-    };
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (error) {
-    console.error(error);
+    console.error("PawPal error:", error);
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         error: "PawPal couldn't fetch an answer right now.",
       }),
-    };
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 };
