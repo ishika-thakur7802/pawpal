@@ -55,3 +55,25 @@ button {
 button:hover {
   transform: translateY(-2px);
 }
+
+.examples {
+  margin-top: 40px;
+}
+
+.examples p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.example-button {
+  margin: 5px;
+  padding: 10px 16px;
+  background: white;
+  color: #2d241f;
+  border: 1px solid #eaded3;
+  font-size: 14px;
+}
+
+.example-button:hover {
+  background: #f5ebe1;
+}

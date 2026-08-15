@@ -1,4 +1,5 @@
 import "./App.css";
+
 function App() {
   return (
     <main>
@@ -16,6 +17,22 @@ function App() {
       />
 
       <button>Ask PawPal 🐾</button>
+
+      <div className="examples">
+        <p>Try asking:</p>
+
+        <button className="example-button">
+          Why is my puppy crying?
+        </button>
+
+        <button className="example-button">
+          Why won't my dog eat?
+        </button>
+
+        <button className="example-button">
+          Why does my puppy bite me?
+        </button>
+      </div>
     </main>
   );
 }
