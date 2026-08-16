@@ -262,3 +262,75 @@ textarea:focus {
   font-style: italic;
   color: #6b4c38;
 }
+
+.voice-button {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #30251f;
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.voice-button:hover {
+  transform: translateY(-1px);
+}
+
+.voice-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.rescue-section {
+  max-width: 650px;
+  margin: 45px auto 0;
+  padding: 30px 24px;
+  background: #fff0e4;
+  border: 1px solid #f1d5bf;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.rescue-icon {
+  font-size: 32px;
+}
+
+.rescue-section h2 {
+  font-family: "Fredoka", sans-serif;
+  font-size: 28px;
+  margin: 8px 0 10px;
+}
+
+.rescue-section p {
+  max-width: 500px;
+  margin: 0 auto 20px;
+  color: #76675d;
+  line-height: 1.6;
+}
+
+.rescue-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.rescue-button {
+  padding: 10px 14px;
+  border: 1px solid #e8c8ae;
+  border-radius: 999px;
+  background: white;
+  color: #5c4b40;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.rescue-button:hover {
+  background: #ffe4d0;
+  transform: translateY(-2px);
+}

@@ -5,6 +5,7 @@ function App() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
 
   const askPawPal = async () => {
     if (!question.trim()) return;
@@ -34,6 +35,38 @@ function App() {
       );
     } finally {
       setLoading(false);
+    }
+  };
+  const hearDog = async (text) => {
+    setSpeaking(true);
+
+    try {
+      const response = await fetch("/.netlify/functions/text-to-speech", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Voice generation failed");
+      }
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      const audio = new Audio(audioUrl);
+
+      audio.onended = () => {
+        setSpeaking(false);
+        URL.revokeObjectURL(audioUrl);
+      };
+
+      await audio.play();
+    } catch (error) {
+      console.error(error);
+      setSpeaking(false);
     }
   };
 
@@ -100,6 +133,15 @@ function App() {
                     .split("DOG_TRANSLATION")[1]
                     .trim()}
                 </p>
+                <button
+                  className="voice-button"
+                  onClick={() =>
+                    hearDog(answer.split("DOG_TRANSLATION")[1].trim())
+                  }
+                  disabled={speaking}
+                >
+                  {speaking ? "🔊 Your dog is talking..." : "🔊 Hear what your dog means"}
+                </button>
               </div>
             )}
           </div>
@@ -131,6 +173,52 @@ function App() {
             </button>
           </div>
         </div>
+                <div className="rescue-section">
+                  <div className="rescue-icon">🧡</div>
+
+                  <h2>Giving a rescued dog a home?</h2>
+
+                  <p>
+                    New home. New humans. New everything.
+                    PawPal can help you understand what your new companion
+                    might be trying to tell you.
+                  </p>
+
+                  <div className="rescue-options">
+                    <button
+                      className="rescue-button"
+                      onClick={() =>
+                        setQuestion(
+                          "I just brought my rescued dog home. What should I do during their first day?"
+                        )
+                      }
+                    >
+                      🏠 Just brought them home
+                    </button>
+
+                    <button
+                      className="rescue-button"
+                      onClick={() =>
+                        setQuestion(
+                          "My newly adopted dog seems scared. How can I help them feel safe?"
+                        )
+                      }
+                    >
+                      😰 They're scared
+                    </button>
+
+                    <button
+                      className="rescue-button"
+                      onClick={() =>
+                        setQuestion(
+                          "My adopted dog won't eat. Is this normal after coming to a new home?"
+                        )
+                      }
+                    >
+                      🍽️ They won't eat
+                    </button>
+                  </div>
+                </div>
       </section>
 
       <div className="bottom-note">
